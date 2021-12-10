@@ -2,7 +2,7 @@ import discord, requests, asyncio, json
 from time import sleep
 from colorama import Fore, init
 from discord.ext import commands
-https://youtu.be/Fw3RB7xnb80
+from playsound import playsound
 init()
 bot = commands.Bot(
   command_prefix='duck!',
@@ -50,22 +50,24 @@ with open("config.json") as file:
     CITY = info["city"] 
 if TOKEN == "your token goes here":
   f = open("config.json", "r")
-  json_object = json.load(a_file)
+  json_object = json.load(f)
   tkn = input("Your discord token: ")
   json_object["token"] = tkn
   a_file = open("config.json", "w")
   json.dump(json_object, a_file)
   a_file.close()
-elif CITY == "your city goes here":  
+if CITY == "your city goes here":  
   f = open("config.json", "r")
-  json_object = json.load(a_file)
+  json_object = json.load(f)
   tkn = input("Your city: ")
   json_object["city"] = tkn
   a_file = open("config.json", "w")
   json.dump(json_object, a_file)
   a_file.close()
 
-print(Fore.GREEN + f"Welcome, {bot.user.name}!")
+logo()
+sleep(1)
+print(Fore.GREEN + f"Welcome!")
 playsound('quack.mp3')
 print(Fore.RESET + "Use [duck help] to see all commands")
 
@@ -85,7 +87,7 @@ async def on_message(msg):
       r = requests.get(apilink)
       x = r.text
       y = json.loads(x)
-      img = y['link']
+      img = y['url']
       m = await msg.channel.send(img)
       await asyncio.sleep(20)
       await m.delete()
