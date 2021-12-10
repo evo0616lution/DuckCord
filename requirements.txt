@@ -1,0 +1,5 @@
+playsound
+discord
+asyncio
+requests
+colorama
